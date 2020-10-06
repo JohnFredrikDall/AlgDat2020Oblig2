@@ -48,7 +48,7 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         endringer = 0;
     }
 
-    public DobbeltLenketListe(T[] a) {
+    public DobbeltLenketListe(T[] a)  {
         this();
         Objects.requireNonNull(a, "Tabellen a er null!");
         int i = 0;
@@ -90,6 +90,10 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
     @Override
     public boolean leggInn(T verdi) {
+        Objects.requireNonNull(verdi, "Null verdi ikke tillatt!");
+
+
+
         throw new UnsupportedOperationException();
     }
 
@@ -135,11 +139,50 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
     @Override
     public String toString() {
-        throw new UnsupportedOperationException();
+        StringBuilder str = new StringBuilder();
+
+        str.append('[');
+
+        if(!tom())
+        {
+            Node<T> p = hode;
+            str.append(p.verdi);
+
+            p=p.neste;
+
+            while(p != null)
+            {
+                str.append(',').append(" ").append(p.verdi);
+                p=p.neste;
+            }
+
+        }
+        str.append(']');
+        return str.toString();
     }
 
     public String omvendtString() {
-        throw new UnsupportedOperationException();
+        StringBuilder str = new StringBuilder();
+
+        str.append('[');
+
+        if(!tom())
+        {
+            Node<T> p = hale;
+            str.append(p.verdi);
+
+            p = p.forrige;
+
+            while(p != null)
+            {
+                str.append(',').append(" ").append(p.verdi);
+                p = p.forrige;
+            }
+
+        }
+        str.append(']');
+
+        return str.toString();
     }
 
     @Override
