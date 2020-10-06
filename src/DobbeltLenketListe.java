@@ -51,25 +51,27 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     public DobbeltLenketListe(T[] a) {
         this();
         Objects.requireNonNull(a, "Tabellen a er null!");
-
         int i = 0;
-        for(; i < a.length && a[i] != null; i++);   //Løper gjennom array med hensyn til nullverdier
 
-            if(i < a.length)
-            {
-                Node<T> p = hode = new Node<>(a[i], null, null);
+
+        for (T t : a) {
+            if (t != null) {
+                Node<T> p = hode = new Node<>(t, null, null);
                 antall = 1;
 
                 for(i++; i < a.length; i++)
                 {
                     if(a[i] != null)
                     {
-                        p = p.neste = new Node<>(a[i], p.forrige, null);
+                        p = p.neste = new Node<>(a[i], p, null);
                         antall++;
                     }
                 }
                 hale = p;
+                break;
             }
+            i++;
+        }
     }
 
     public Liste<T> subliste(int fra, int til){

@@ -11,6 +11,6 @@ public class Main {
         Liste<Integer> liste = new DobbeltLenketListe<>();
         liste = new DobbeltLenketListe<>(new Integer[]{1});
 
-
+        System.out.println(liste.antall());
     }
 }
