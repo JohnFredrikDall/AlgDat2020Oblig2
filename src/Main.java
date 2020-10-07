@@ -2,16 +2,17 @@ import java.util.LinkedList;
 
 public class Main {
     public static void main(String[]args){
-        Character[] c = {'A','B','C','D','E','F','G','H','I','J',};
-        DobbeltLenketListe<Character> liste = new DobbeltLenketListe<>(c);
+        DobbeltLenketListe<Integer> liste = new DobbeltLenketListe<>();
+        liste = new DobbeltLenketListe<>();
 
-        for(int i = 0; i < 9; i++)
-        {
-            System.out.println(liste.hent(i));
-        }
-        System.out.println(liste.subliste(3,8)); // [D, E, F, G, H]
-        System.out.println(liste.subliste(5,5)); // []
-        System.out.println(liste.subliste(8,liste.antall())); // [I, J]
-        //System.out.println(liste.subliste(0,11)); // skal kaste unnt
+        liste.leggInn(0, 4);  // ny verdi i tom liste
+        liste.leggInn(0, 2);  // ny verdi legges forrest
+        liste.leggInn(2, 6);  // ny verdi legges bakerst
+        liste.leggInn(1, 3);  // ny verdi nest forrest
+        liste.leggInn(3, 5);  // ny verdi nest bakerst
+        liste.leggInn(0, 1);  // ny verdi forrest
+        liste.leggInn(6, 7);  // ny verdi legges bakerst
+        System.out.println(liste.toString());
+        System.out.println(liste.omvendtString());
     }
 }
