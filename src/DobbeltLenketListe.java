@@ -82,7 +82,7 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
         if (til > antall)
             throw new IndexOutOfBoundsException(
-                    ("til(" + til + ") > tablengde(" + antall + ")"));
+                    ("til(" + til + ") > antall(" + antall + ")"));
 
         if (fra > til)
             throw new IllegalArgumentException
@@ -94,13 +94,14 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
         int i = fra;
         DobbeltLenketListe<T> a = new DobbeltLenketListe<>();
+        if(fra == til) return a;
         a.leggInn(finnNode(fra).verdi);
         i++;
         a.antall = til - fra;
 
         while (i < til){
-            i++;
             a.leggInn(finnNode(i).verdi);
+            i++;
         }
         return a;
     }
