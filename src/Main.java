@@ -12,7 +12,6 @@ public class Main {
         liste.leggInn(3, 5);  // ny verdi nest bakerst
         liste.leggInn(0, 1);  // ny verdi forrest
         liste.leggInn(6, 7);  // ny verdi legges bakerst
-        System.out.println(liste.toString());
-        System.out.println(liste.omvendtString());
+        liste.fjern(5);
     }
 }
