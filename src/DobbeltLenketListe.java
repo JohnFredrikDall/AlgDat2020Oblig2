@@ -339,9 +339,14 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     }
 
     @Override
-    public void nullstill() {
-        throw new UnsupportedOperationException();
+    public void nullstill()
+    {
+        this.hode = null;
+        this.hale = null;
+        antall = 0;
+        endringer++;
     }
+
 
     @Override
     public String toString() {
@@ -393,11 +398,14 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
     @Override
     public Iterator<T> iterator() {
-        throw new UnsupportedOperationException();
+        return new DobbeltLenketListeIterator();
     }
 
     public Iterator<T> iterator(int indeks) {
-        throw new UnsupportedOperationException();
+        indeksKontroll(indeks, false);
+        DobbeltLenketListeIterator iterator = new DobbeltLenketListeIterator();
+        iterator.denne= finnNode(indeks);
+        return iterator;
     }
 
     private class DobbeltLenketListeIterator implements Iterator<T>
@@ -423,7 +431,15 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
         @Override
         public T next(){
-            throw new UnsupportedOperationException();
+            if(!hasNext()) throw new NoSuchElementException("Ingen verdier!");
+
+            if(iteratorendringer != endringer) throw new
+                    ConcurrentModificationException("Antall endringer stemmer ikke");
+
+            fjernOK = true;
+            T verdi = denne.verdi;
+            denne = denne.neste;
+            return verdi;
         }
 
         @Override
