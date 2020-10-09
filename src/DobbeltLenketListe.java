@@ -6,11 +6,8 @@
 import java.util.Comparator;
 import java.util.ConcurrentModificationException;
 import java.util.NoSuchElementException;
-import java.util.StringJoiner;
-
 import java.util.Iterator;
 import java.util.Objects;
-import java.util.function.Predicate;
 
 
 
@@ -237,41 +234,46 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         if(verdi == null) return false;
 
         Node<T> q = hode, p = null;
-
         while(q != null)
         {
             if(q.verdi.equals(verdi)) break;
-            p = q; q = q.neste;
+            p = q;
+            q = q.neste;
         }
 
         if(q == null) return false;
+        //Sjekker om verdi er første element
         if(p == null){
 
+            //Hvis det kun er ett element i listen
             if(antall == 1){
                 hode = q;
                 hale = null;
             }
+            //Hvis flere
             else
             {
                 hode = q.neste;
                 hode.forrige = null;
             }
         }
+        //Verdi er lengre ute i listen
         else{
+            //Verdi er ikke hale
             if(q != hale){
-
                     p.neste = q.neste;
                     p.neste.forrige = q.forrige;
             }
+            //Verdien er halen
             else{
                 p.neste.forrige = q.forrige;
                 p.neste = null;
                 hale = p;
             }
         }
-
         antall--;
         endringer++;
+
         return true;
     }
 
@@ -304,7 +306,6 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
             prev.neste = null;
             hale = prev;
-
 
             temp = p.verdi;
         }
